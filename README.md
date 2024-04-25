@@ -13,10 +13,10 @@ Given a monocular video sequence, our proposed FlashAvatar can reconstruct a hig
 
 1. Create the environment:
 
-```
-conda env create --file environment.yml
-conda activate FlashAvatar
-```
+    ```bash
+    conda env create --file environment.yml
+    conda activate FlashAvatar
+    ```
 
 2. Ensure that the correct `nvcc.exe` is taken from the conda environment:  
    Linux:
