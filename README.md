@@ -15,23 +15,22 @@ Given a monocular video sequence, our proposed FlashAvatar can reconstruct a hig
 
     ```bash
     conda env create --file environment.yml
-    conda activate FlashAvatar
     ```
 
 2. Ensure that the correct `nvcc.exe` is taken from the conda environment:  
    Linux:
     ```bash
-    conda activate 3DSSL-demo
+    conda activate FlashAvatar
     conda env config vars set CUDA_HOME=$CONDA_PREFIX
-    conda activate base
-    conda activate 3DSSL-demo
+    conda deactivate
+    conda activate FlashAvatar
     ```
    Windows: 
    ```bash
-    conda activate 3DSSL-demo
+    conda activate FlashAvatar
     conda env config vars set CUDA_HOME=$Env:CONDA_PREFIX
-    conda activate base
-    conda activate 3DSSL-demo
+    conda deactivate
+    conda activate FlashAvatar
     ```
 3. Check whether the correct `nvcc` can be found on the path via:
     ```bash
