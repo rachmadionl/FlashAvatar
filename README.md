@@ -59,7 +59,7 @@ conda activate FlashAvatar
     ```
     Into this folder: `flame`
 
-7. DONE! One Note: 
+7. DONE! One Note: FlashAvatar is originally ran on RTX3090 (24 GB VRAM), while ours is RTX3080 (10 GB VRAM). With that in mind, we need to play around with the number of data training and testing. Originally, [`test_num`](https://github.com/rachmadionl/FlashAvatar/blob/main/scene/__init__.py#L34) is set to 500 and [`max_train_num`](https://github.com/rachmadionl/FlashAvatar/blob/main/scene/__init__.py#L37) is set to 10000. Due to memory limitation, I changed both value to 100 when running the provided example data.
 
 ## Data Convention
 The data is organized in the following form：
