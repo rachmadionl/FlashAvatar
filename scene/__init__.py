@@ -31,9 +31,11 @@ class Scene_mica:
         mica_ckpt_dir = os.path.join(mica_datadir, 'checkpoint')
         self.N_frames = len(os.listdir(mica_ckpt_dir))
         self.cameras = []
-        test_num = 500
+        # test_num = 500  # Note: This is the original params. Due to GPU memory limitation, I changed the value.
+        test_num = 100
         eval_num = 50
-        max_train_num = 10000
+        # max_train_num = 10000  # Note: This is the original params. Due to GPU memory limitation, I changed the value.
+        max_train_num = 100
         train_num = min(max_train_num, self.N_frames - test_num)
         ckpt_path = os.path.join(mica_ckpt_dir, '00000.frame')
         payload = torch.load(ckpt_path)

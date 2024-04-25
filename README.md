@@ -6,22 +6,61 @@ Given a monocular video sequence, our proposed FlashAvatar can reconstruct a hig
 
 ## Setup
 
-This code has been tested on Nvidia RTX 3090. 
+0. Git Clone via:
+    ```bash
+    git clone https://github.com/rachmadionl/FlashAvatar.git --recursive
+    ```
 
-Create the environment:
+1. Create the environment:
 
 ```
 conda env create --file environment.yml
 conda activate FlashAvatar
 ```
 
-Install PyTorch3D:
+2. Ensure that the correct `nvcc.exe` is taken from the conda environment:  
+   Linux:
+    ```bash
+    conda activate 3DSSL-demo
+    conda env config vars set CUDA_HOME=$CONDA_PREFIX
+    conda activate base
+    conda activate 3DSSL-demo
+    ```
+   Windows: 
+   ```bash
+    conda activate 3DSSL-demo
+    conda env config vars set CUDA_HOME=$Env:CONDA_PREFIX
+    conda activate base
+    conda activate 3DSSL-demo
+    ```
+3. Check whether the correct `nvcc` can be found on the path via:
+    ```bash
+    nvcc --version
+    ```
+    which should say something like `release 11.8`.
 
-```
-conda install -c fvcore -c iopath -c conda-forge fvcore iopath
-conda install -c bottler nvidiacub
-conda install pytorch3d -c pytorch3d
-```
+4. Install submodules:
+    ```bash
+    pip install submodules/diff-gaussian-rasterization
+    pip install submodules/simple-knn
+    ```
+
+5. Install PyTorch3D:
+    ```bash
+    conda install -c fvcore -c iopath -c conda-forge fvcore iopath
+    conda install -c bottler nvidiacub
+    conda install pytorch3d -c pytorch3d
+    ```
+
+6. Copy the following files from Metrical Tracker (Assuming you have set up Metrical Tracker on your environment):
+    ```
+    data/FLAME2020/FLAME_masks.pkl
+    data/FLAME2020/generic_model.pkl
+    ```
+    Into this folder: `flame`
+
+7. DONE! One Note: 
+
 ## Data Convention
 The data is organized in the following form：
 ```

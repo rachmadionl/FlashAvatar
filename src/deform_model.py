@@ -38,7 +38,7 @@ class Deform_Model(nn.Module):
         self.uv_rasterizer = Pytorch3dRasterizer(self.uv_size)
         
         # flame mask
-        flame_mask_path = "flame/FLAME_masks/FLAME_masks.pkl"   
+        flame_mask_path = "flame/FLAME_masks.pkl"   
         flame_mask_dic = load_binary_pickle(flame_mask_path) 
         boundary_id = flame_mask_dic['boundary']
         full_id = np.array(range(5023)).astype(int)

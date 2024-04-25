@@ -8,5 +8,5 @@ metrical-tracker
 *txt
 *sh
 flame/generic_model.pkl
-flame/FLAME_masks
+flame/FLAME_masks.pkl
 
