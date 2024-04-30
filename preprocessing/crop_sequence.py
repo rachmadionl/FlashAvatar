@@ -37,7 +37,7 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_folder', type=str, default='./example/dataset/510_s4/color')
-    parser.add_argument('--output_folder', type=str, default='./example/dataset/510_s4/color_cropped')
+    parser.add_argument('--output_folder', type=str, default='./example/dataset/510_s4/imgs')
     parser.add_argument('--img_size', type=int, default=512)
     args = parser.parse_args()
 

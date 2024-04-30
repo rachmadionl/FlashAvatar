@@ -32,11 +32,11 @@ class Scene_mica:
         self.N_frames = len(os.listdir(mica_ckpt_dir))
         self.cameras = []
         # test_num = 500  # Note: This is the original params. Due to GPU memory limitation, I changed the value.
-        test_num = 100
+        test_num = np.floor(0.25 * self.N_frames)
         eval_num = 50
         # max_train_num = 10000  # Note: This is the original params. Due to GPU memory limitation, I changed the value.
         max_train_num = 100
-        train_num = min(max_train_num, self.N_frames - test_num)
+        train_num = max(max_train_num, int(self.N_frames - test_num))
         ckpt_path = os.path.join(mica_ckpt_dir, '00000.frame')
         payload = torch.load(ckpt_path)
         flame_params = payload['flame']
@@ -60,6 +60,7 @@ class Scene_mica:
         for frame_id in tqdm(range(range_down, range_up)):
             image_name_mica = str(frame_id).zfill(5) # obey mica tracking
             image_name_ori = str(frame_id+frame_delta).zfill(5)
+            image_name_alpha = str(frame_id+frame_delta).zfill(4)
             ckpt_path = os.path.join(mica_ckpt_dir, image_name_mica+'.frame')
             payload = torch.load(ckpt_path)
             
@@ -75,15 +76,26 @@ class Scene_mica:
             R = np.transpose(w2cR) # R is stored transposed due to 'glm' in CUDA code
             T = w2cT
 
-            image_path = os.path.join(images_folder, image_name_ori+'.jpg')
-            image = Image.open(image_path)
-            resized_image_rgb = PILtoTensor(image)
-            gt_image = resized_image_rgb[:3, ...]
-            
+            try:
+                image_path = os.path.join(images_folder, image_name_ori+'.jpg')
+                image = Image.open(image_path)
+                resized_image_rgb = PILtoTensor(image)
+                gt_image = resized_image_rgb[:3, ...]
+            except FileNotFoundError:
+                image_path = os.path.join(images_folder, image_name_ori+'.png')
+                image = Image.open(image_path)
+                resized_image_rgb = PILtoTensor(image)
+                gt_image = resized_image_rgb[:3, ...]
+
             # alpha
-            alpha_path = os.path.join(alpha_folder, image_name_ori+'.jpg')
-            alpha = Image.open(alpha_path)
-            alpha = PILtoTensor(alpha)
+            try:
+                alpha_path = os.path.join(alpha_folder, image_name_alpha+'.jpg')
+                alpha = Image.open(alpha_path)
+                alpha = PILtoTensor(alpha)
+            except FileNotFoundError:
+                alpha_path = os.path.join(alpha_folder, image_name_alpha+'.png')
+                alpha = Image.open(alpha_path)
+                alpha = PILtoTensor(alpha)
 
             # # if add head mask
             head_mask_path = os.path.join(parsing_folder, image_name_ori+'_neckhead.png')
