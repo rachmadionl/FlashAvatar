@@ -7,6 +7,6 @@
 [submodule "submodules/RobustVideoMatting"]
 	path = submodules/RobustVideoMatting
 	url = https://github.com/PeterL1n/RobustVideoMatting.git
-[submodule "face-parsing.PyTorch"]
+[submodule "submodules/face_parser"]
 	path = submodules/face_parser
-	url = https://github.com/zllrunning/face-parsing.PyTorch.git
+	url = https://github.com/rachmadionl/face_parser.git
