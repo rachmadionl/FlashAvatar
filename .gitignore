@@ -9,4 +9,4 @@ metrical-tracker
 *sh
 flame/generic_model.pkl
 flame/FLAME_masks.pkl
-
+pretrained*
